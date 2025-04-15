@@ -1,5 +1,6 @@
 
-const SERVER_URL = 'https://back-blackjack-express.onrender.com'; // Cambia esto a la URL de tu servidor
+// eslint-disable-next-line no-undef
+const SERVER_URL = import.meta.env.SERVER_URL; // Cambia esto a la URL de tu servidor
 // Función para obtener la lista de mesas
 export const fetchTables = async () => {
   try {

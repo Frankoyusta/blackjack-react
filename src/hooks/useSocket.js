@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-const SERVER_URL = 'https://back-blackjack-express.onrender.com';
+// eslint-disable-next-line no-undef
+const SERVER_URL = import.meta.env.SERVER_URL; 
 
 const useSocket = () => {
   const [socket, setSocket] = useState(null);

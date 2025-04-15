@@ -5,7 +5,8 @@ import LobbyView from './components/lobby/LobbyView';
 import TableView from './components/game/TableView';
 
 // Definimos la URL del servidor
-const SERVER_URL = 'https://back-blackjack-express.onrender.com';
+// eslint-disable-next-line no-undef
+const SERVER_URL = import.meta.env.SERVER_URL ;
 
 // Componente principal
 const BlackjackOnlineApp = () => {
