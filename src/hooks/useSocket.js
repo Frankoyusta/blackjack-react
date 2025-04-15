@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-const SERVER_URL = 'http://localhost:3001';
+const SERVER_URL = 'https://back-blackjack-express.onrender.com';
 
 const useSocket = () => {
   const [socket, setSocket] = useState(null);

@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client';
 
 // Definimos la URL del servidor
-const SERVER_URL = 'http://localhost:3001';
+const SERVER_URL = 'https://back-blackjack-express.onrender.com';
 
 // Crear una conexión de socket
 const createSocket = (onConnect, onDisconnect) => {

@@ -1,5 +1,5 @@
 
-const SERVER_URL = 'http://localhost:3001'; // Cambia esto a la URL de tu servidor
+const SERVER_URL = 'https://back-blackjack-express.onrender.com'; // Cambia esto a la URL de tu servidor
 // Función para obtener la lista de mesas
 export const fetchTables = async () => {
   try {
