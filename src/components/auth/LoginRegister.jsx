@@ -14,7 +14,7 @@ const LoginRegister = ({ onLogin }) => {
   return (
     <div className="max-w-md mx-auto p-8 bg-gradient-to-b from-gray-900 to-gray-800 rounded-lg shadow-2xl border border-gray-700">
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-amber-500 mb-2">Bienvenido al casino del DISC</h1>
+        <h1 className="text-4xl font-bold text-amber-500 mb-2">Bienvenido al casino del DICSAS</h1>
         <div className="flex justify-center">
           <div className="h-1 w-24 bg-amber-500 rounded"></div>
         </div>
