@@ -6,7 +6,8 @@ import TableView from './components/game/TableView';
 
 // Definimos la URL del servidor
 // eslint-disable-next-line no-undef
-const SERVER_URL = import.meta.env.SERVER_URL ;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+console.log('SERVER_URL:', SERVER_URL);
 
 // Componente principal
 const BlackjackOnlineApp = () => {
@@ -196,8 +197,9 @@ const BlackjackOnlineApp = () => {
   // Realizar una apuesta
   const handlePlaceBet = (amount) => {
     if (!socket || !user) return;
-    
+    console.log('Realizando apuesta:', amount);
     socket.emit('placeBet', { userId: user.id, amount }, (response) => {
+      console.log('Respuesta de la apuesta:', response);
       if (response.success) {
         setUser(prevUser => ({
           ...prevUser,

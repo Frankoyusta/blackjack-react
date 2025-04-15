@@ -7,6 +7,10 @@ const BettingPhase = ({ user, currentPlayer, onPlaceBet }) => {
     onPlaceBet(betAmount);
   };
 
+  console.log('BettingPhase - currentPlayer:', currentPlayer);
+  console.log('BettingPhase - plata:', betAmount);
+  
+
   return (
     <div className="mb-4 p-4 bg-blue-50 rounded-lg">
       <h3 className="text-xl font-bold mb-4">Fase de Apuestas</h3>

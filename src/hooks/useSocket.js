@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 // eslint-disable-next-line no-undef
-const SERVER_URL = import.meta.env.SERVER_URL; 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const useSocket = () => {
   const [socket, setSocket] = useState(null);
