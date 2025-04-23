@@ -29,12 +29,14 @@ const BlackjackOnlineApp = () => {
   // Detectar cambios en la autenticación
   useEffect(() => {
     if (user) {
-      setView('lobby');
+      if (!currentTable) { // Solo cambiar a lobby si no hay mesa activa
+        setView('lobby');
+      }
       fetchTables();
     } else {
       setView('login');
     }
-  }, [user, fetchTables]);
+  }, [user, currentTable, fetchTables]); // Añadir currentTable a las dependencias
   
   // Refrescar las mesas periódicamente cuando está en el lobby
   useEffect(() => {
@@ -47,11 +49,11 @@ const BlackjackOnlineApp = () => {
   
   // Actualizar vista cuando cambia la mesa actual
   useEffect(() => {
+    console.log("Effect triggered, currentTable:", currentTable);
     if (currentTable) {
+      console.log("Cambiando a vista de mesa");
       setView('table');
-    } else if (user) {
-      setView('lobby');
-    }
+    } 
   }, [currentTable, user]);
   
   // Manejar creación de mesa
@@ -65,7 +67,10 @@ const BlackjackOnlineApp = () => {
   // Manejar unirse a una mesa
   const handleJoinTable = async (tableId) => {
     const result = await joinTable(tableId);
-    if (!result.success) {
+    console.log('Resultado de unirse a la mesa:', result);
+    if (result.success) {
+      setView('table'); // Forzar cambio de vista aquí
+    } else {
       alert('Error al unirse a la mesa: ' + result.error);
     }
   };
@@ -119,7 +124,6 @@ const BlackjackOnlineApp = () => {
             Conectando al servidor...
           </div>
         )}
-        
         {view === 'lobby' && (
           <LobbyView 
             user={user}

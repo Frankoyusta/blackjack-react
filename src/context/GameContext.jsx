@@ -74,10 +74,11 @@ export const GameProvider = ({ children }) => {
     
     try {
       const response = await fetch(`${SERVER_URL}/api/tables`, {
-        signal: AbortSignal.timeout(5000),
         // Optional: Add headers if needed
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
       
@@ -131,8 +132,11 @@ export const GameProvider = ({ children }) => {
     
     return new Promise((resolve) => {
       socket.emit('joinTable', { userId: user.id, tableId }, (response) => {
+        console.log("Respuesta del servidor al unirse:", response);
         if (response.success) {
+          console.log("Mesa actual antes:", currentTable);
           setCurrentTable(response.table);
+          console.log("Mesa actual después:", response.table);
         }
         resolve(response);
       });
@@ -203,4 +207,7 @@ export const GameProvider = ({ children }) => {
   );
 };
 
-export const useGameContext = () => useContext(GameContext);
+// Change from arrow function to named function expression for Fast Refresh compatibility
+export function useGameContext() {
+  return useContext(GameContext);
+}
