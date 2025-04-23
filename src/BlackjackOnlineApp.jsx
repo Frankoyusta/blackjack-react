@@ -104,20 +104,24 @@ const BlackjackOnlineApp = () => {
   }, [view]);
   
   // Manejar registro/login
-  const handleLogin = (username) => {
+  const handleLogin = (username, password) => {
     if (!socket || !connected) return;
     
-    socket.emit('register', { username }, (response) => {
+    socket.emit('login', { username, password }, (response) => {
       if (response.success) {
+        // Guarda el token en localStorage para mantener la sesión
+        localStorage.setItem('token', response.token);
+        
         setUser({
-          id: response.userId,
-          username,
-          coins: response.coins
+          id: response.user.id,
+          username: response.user.username,
+          coins: response.user.coins
         });
+        
         setView('lobby');
         fetchTables();
       } else {
-        alert('Error al iniciar sesión: ' + response.error);
+        alert('Error al iniciar sesión: ' + JSON.stringify(response));
       }
     });
   };

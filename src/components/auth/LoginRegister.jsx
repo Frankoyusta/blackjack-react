@@ -7,7 +7,7 @@ const LoginRegister = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username.trim() && password.trim()) {
-      onLogin(username);
+      onLogin(username,password);
     }
   };
 
