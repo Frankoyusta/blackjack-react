@@ -1,13 +1,26 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
 
-const LoginRegister = ({ onLogin }) => {
+const LoginRegister = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { login } = useUserContext();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (username.trim() && password.trim()) {
-      onLogin(username,password);
+      setIsLoading(true);
+      try {
+        await login(username, password);
+        navigate('/game');
+      } catch (error) {
+        alert('Error al iniciar sesión: ' + (error.message || JSON.stringify(error)));
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -62,9 +75,10 @@ const LoginRegister = ({ onLogin }) => {
         <div className="flex justify-center pt-4">
           <button 
             type="submit"
+            disabled={isLoading}
             className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none"
           >
-            Ingresar
+            {isLoading ? 'Procesando...' : 'Ingresar'}
           </button>
         </div>
       </form>
