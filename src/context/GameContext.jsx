@@ -71,13 +71,30 @@ export const GameProvider = ({ children }) => {
 
   // Métodos para manejar mesas y juego
   const fetchTables = async () => {
+    
     try {
-      const response = await fetch(`${SERVER_URL}/api/tables`);
+      const response = await fetch(`${SERVER_URL}/api/tables`, {
+        signal: AbortSignal.timeout(5000),
+        // Optional: Add headers if needed
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      
+      // Check if response is OK before parsing
+      if (!response.ok) {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+      
       const data = await response.json();
       setTables(data);
     } catch (error) {
       console.error('Error al cargar las mesas:', error);
-    }
+      
+      
+      // Optional: Implement retry logic with exponential backoff
+      // if (retryCount < maxRetries) setTimeout(() => fetchTables(), 2000 * (retryCount + 1));
+    } 
   };
 
   const createTable = async (tableName) => {
