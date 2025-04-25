@@ -10,10 +10,10 @@ const Player = ({ player, isCurrentUser, isTurn, onPlayerAction }) => {
     <div className={`mb-6 p-4 rounded-lg ${isTurn ? 'bg-blue-100' : 'bg-gray-100'} ${isBusted ? 'opacity-70' : ''}`}>
       <div className="flex justify-between items-center mb-2">
         <div>
-          <h3 className="text-xl font-semibold">
+          <h3 className="text-xl font-semibold  text-black">
             {player.username} {isCurrentUser ? '(Tú)' : ''}
           </h3>
-          <p>RPEREZCoins: {player.coins}</p>
+          <p className="text-black">RPEREZCoins: {player.coins || player.balance || 0}</p>
           {player.bet > 0 && <p>Apuesta: {player.bet}</p>}
         </div>
         {isBusted && <span className="text-red-600 font-bold">¡Perdió!</span>}

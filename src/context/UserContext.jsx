@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 const UserContext = createContext();
 
@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (username, password) => {
+  const login = useCallback(async (username, password) => {
     try {
       const response = await fetch(`${SERVER_URL}/auth/login`, {
         method: 'POST',
@@ -44,28 +44,33 @@ export const UserProvider = ({ children }) => {
       setUser(data.user);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
+
+      return { success: true, user: data.user };
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
+      return { success: false, error: error.message };
     }
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-  };
+    
+    return { success: true };
+  }, []);
 
-  const updateUserData = (userData) => {
+  const updateUserData = useCallback((userData) => {
     setUser(prevUser => {
       const updatedUser = { ...prevUser, ...userData };
       localStorage.setItem('user', JSON.stringify(updatedUser));
       return updatedUser;
     });
-  };
+  }, []);
 
-  const isAuthenticated = () => {
+  const isAuthenticated = useCallback(() => {
     return !!user && !!localStorage.getItem('token');
-  };
+  }, [user]);
 
   return (
     <UserContext.Provider value={{ 

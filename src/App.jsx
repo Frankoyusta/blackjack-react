@@ -20,9 +20,9 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   return (
-    <UserProvider>
-      <GameProvider>
-        <Router>
+    <Router>
+      <UserProvider>
+        <GameProvider>
           <div className="App">
             <Routes>
               <Route path="/" element={<Login />} />
@@ -37,9 +37,9 @@ function App() {
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>
-        </Router>
-      </GameProvider>
-    </UserProvider>
+        </GameProvider>
+      </UserProvider>
+    </Router>
   );
 }
 

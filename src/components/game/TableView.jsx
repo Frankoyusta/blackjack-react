@@ -64,9 +64,9 @@ const TableView = ({
   return (
     <div className="p-6 bg-white rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">{table.name}</h1>
+        <h1 className="text-2xl font-bold text-black">{table.name}</h1>
         <div className="text-right">
-          <p className="text-lg font-semibold">{user.username}</p>
+          <p className="text-lg font-semibold text-black">{user.username}</p>
           <p className="text-gray-600">RPEREZCoins: {user.coins}</p>
         </div>
       </div>
@@ -100,7 +100,7 @@ const TableView = ({
       
       {table.dealer && table.dealer.hand.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold mb-2">Dealer</h2>
+          <h2 className="text-xl font-bold mb-2  text-black">Dealer</h2>
           <HandComponent 
             cards={table.dealer.hand}
             hidden={table.gamePhase !== 'dealer' && table.gamePhase !== 'results'}
@@ -110,7 +110,7 @@ const TableView = ({
       )}
       
       <div className="mt-8">
-        <h2 className="text-xl font-bold mb-4">Jugadores</h2>
+        <h2 className="text-xl font-bold mb-4  text-black">Jugadores</h2>
         {table.players.map(player => (
           <Player 
             key={player.id}
@@ -124,11 +124,11 @@ const TableView = ({
       
       {table.status === 'waiting' && (
         <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
-          <h3 className="font-bold mb-2">Esperando para comenzar</h3>
+          <h3 className="font-bold mb-2 text-black">Esperando para comenzar {table.status}</h3>
           {isCreator ? (
-            <p>Como creador de la mesa, puedes iniciar el juego cuando estés listo.</p>
+            <p className="text-black">Como creador de la mesa, puedes iniciar el juego cuando estés listo.</p>
           ) : (
-            <p>Esperando a que el creador de la mesa inicie el juego...</p>
+            <p className="text-black">Esperando a que el creador de la mesa inicie el juego...</p>
           )}
         </div>
       )}
